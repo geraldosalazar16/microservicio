@@ -1,0 +1,28 @@
+module.exports = (body) => {
+    if (!body) {
+        return {
+            status: 'failed',
+            message: 'Bad request. No POST body.'
+        };
+    }
+
+    let data;
+    if (typeof body === 'string') {
+        try {
+            return {
+                status: 'success',
+                body: JSON.parse(body)
+            }
+        } catch {
+            return {
+                status: 'failed',
+                message: 'Bad request. POST body must be valid JSON.'
+            };
+        }
+    } else {
+        return {
+            status: 'success',
+            body
+        }
+    }
+}
